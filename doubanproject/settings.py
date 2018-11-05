@@ -114,3 +114,6 @@ import sys
 sys.path.insert(0,os.path.join(BASE_DIR,'apps'))
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
+
+# django认证系统使用的模型类
+AUTH_USER_MODEL='users.User'
