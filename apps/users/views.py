@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 
 # Create your views here.
 from .models import *
 from django.http import HttpResponse
 from django.views.generic import View
+from django.contrib.auth import authenticate,login,logout
+
 import re
 def register(request):
     """注册"""
@@ -46,6 +48,50 @@ def register(request):
         else:
             return render(request, 'users/db_register.html', {'merror': '该用户名已被注册'})
 
-def login(View):
+
+class Logins(View):
     """用户登陆"""
-    return render(request,"users/db_login.html")
+    def get(self,request):
+        if request.user.is_authenticated():
+            return redirect('/db_movie')
+
+        cookie = request.COOKIES.get('form_email')
+        print(cookie)
+        if cookie==None:
+            username =''
+        else:
+            username=cookie
+        # 返回登陆页面
+        return render(request,'users/db_login.html',{'form_name':username})
+
+    def post(self, request):
+        # 进行登陆验证
+        # 获取登陆请求的用户信息
+        username = request.POST.get('form_email')
+        password = request.POST.get('form_password')
+        remember = request.POST.get('remember')
+        if not all([username, password]):
+            # 判读请求数据是否完整
+            return render(request, 'users/db_login.html', {'msg': '请把账号和密码填写完整'})
+
+        # 进行校验账号密码
+        user = authenticate(username=username, password=password)
+        if user == None:
+            return render(request, 'users/db_login.html', {'msg': '您输入的账户或密码信息有误'})
+
+        # 获取登陆后跳转的地址
+        login(request, user)  # 通过session记住用户登陆状态
+        next_url = request.GET.get('next', '/db_movie')
+        if remember == 'on':
+            # 判读是否有记住账号
+            response = redirect(next_url)
+            response.set_cookie('form_email', username)  # 通过cookie记住用户名
+
+        else:
+            response = redirect(next_url)
+            response.delete_cookie('username')
+
+        return response
+
+def db_movie(request):
+    return render(request,"movies/db_movie.html")

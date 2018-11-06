@@ -4,6 +4,8 @@ from .views import *
 
 
 urlpatterns = [
-    url(r"^login", login),
+    url(r"^login",Logins.as_view()),
     url(r"^register$", register),
+    url(r"^db_movie$", db_movie),
+    # url(r"^index", index),
 ]

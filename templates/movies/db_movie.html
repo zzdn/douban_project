@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/db_movie.css">
+	<script type="text/javascript" src="../static/js/vue.js"></script>
+</head>
+<body>
+   <div id="global-nav">
+	<div class="nav-info"><a href="">登陆</a><a href="">注册</a></div>
+	<div class="nav-download">下载豆瓣客户端</div>
+	<div class="nav">
+		<ul>
+		<li><a href="">豆瓣</a></li>
+		<li><a href="">读书</a></li>
+		<li><a href="">电影</a></li>
+		<li><a href="">音乐</a></li>
+		<li><a href="">同城</a></li>
+		<li><a href="">小组</a></li>
+		<li><a href="">阅读</a></li>
+		<li><a href="">FM</a></li>
+		<li><a href="">时间</a></li>
+		<li><a href="">豆品</a></li>
+		<li><a href="">更多</a></li></ul>
+	</div>
+   </div>
+   <div class="nav-gray">
+   <div class="nav-wrap">
+   	<div class="nav-primary clearfix">
+   		<div class="nav-logo"></div>
+   		<div class="nav-search clearfix">
+   		  <form class="clearfix">
+   		  	
+   			<div class="inp">
+   				<input type="" name="search-text" size="22" maxlength="60" placeholder="搜索电影、电视剧、综艺、影人">
+   			</div>
+   			<div class="inp-btn">
+   				<input type="" name="">
+   			</div>
+
+   		  </form>
+   		</div>
+   	</div>
+   </div>
+   <div class="nav-items">
+   	<ul><li><a href="">影讯&购票</a></li>
+   	<li><a href="">选电影</a></li>
+   	<li><a href="">电视剧</a></li>
+   	<li><a href="">排行榜</a></li>
+   	<li><a href="">分类</a></li>
+   	<li><a href="">影评</a></li>
+   	<li><a href="">2017年度榜单</a></li>
+   	<li><a href="">2017观影报告</a></li></ul>
+   </div>
+   </div>
+   <div id="wrapper">
+   	 <div id="content">
+   	 	<div class="artical">
+   	 	<div id="screening">
+   	 		<div class="screening-hd">
+   	 			<div class="ui-slide-control">
+   	 				<span><a href=""></a></span>
+   	 				<span><a class="btn-next" href=""></a></span>
+   	 			</div>
+   	 			<div class="slide-tip">
+   	 				<span>1</span> / <span>6</span>
+   	 			</div>
+   	 			<h2>正在热映<span><a href="">全部正在热映»</a></span>
+   	 				<span><a href="">即将上映»</a></span></h2>
+   	 		</div>
+   	 		<div class="screening-bd" id="app">
+   	 			<ul class="ui-slide-content">
+				<li v-for="(item,index) of list"  class="ui-slide-item" @click="deleteItem(index)">
+					<ul>
+					<li class="poster"><img :src='item.img'></li>
+					<li class="title"><a href="">{{item.mtitle}}</a></li>
+					<li class="rating"><span class="rating-star " :class=item.s_rating></span><span class="subject-rate">{{item.score}}</span></li>
+					<li class="ticket_btn"><span><a href="">选座购票</a></span></li></ul>
+				</li>
+				</ul>
+   	 		</div>
+   	 	</div>
+		<div id="movie_home_left_bottom"><a href=""><img src="../static/db_img/ad_middle1.jpg" width="675" height="112"></a></div>
+		<div class="gaia">
+			<div class="fliter-wp">
+				<h2 class="clearfix">
+					<div data-type="movie" class="activate">最近热门电影</div>
+					<div class="filter">
+					  <form action="get" class="gaia_frm">
+						<input type="hidden" name="" value="movie">
+						<div class="tags">
+							<div class="tag-list">
+								<label class="activate">热门<input type="radio" name="tag" value="热门" checked="checked"></label>
+								<label>最新<input type="radio" name="tag" value="最新" ></label>
+								<label>豆瓣高分<input type="radio" name="tag" value="豆瓣高分" ></label>
+								<label>冷门佳片<input type="radio" name="tag" value="冷门佳片" ></label>
+								<label>华语<input type="radio" name="tag" value="华语" ></label>
+								<label>欧美<input type="radio" name="tag" value="欧美" ></label>
+								<label>韩国<input type="radio" name="tag" value="韩国" ></label>
+								<label>日本<input type="radio" name="tag" value="日本" ></label>
+							</div>
+						</div>
+					  </form></div>
+					  <a href="" class="more-link">更多»</a>
+				    </h2>
+			</div>
+			<div class="list-wp">
+				<div class="slider" id="vue2">
+					<div class="slider-container" style="height: 426px;">
+						<div class="slide-wrapper" style="">
+							<div class="slide-page clearfix" style="width: 700px">
+								<a v-for="(item,index) of list1" class="item" href=""><div class="cover-wp"><img :src='item.img'></div>
+									<p>{{item.mtitle}} <strong>{{item.score}}</strong></p></a>
+							</div>
+						</div>
+					</div>
+					<div class="slide-ctrl ui-slide-control">
+					  <p style="height: 15px;"></p>
+                      <a class="btn-prev" href="javascript:void(0)"></a>
+                    
+                        <i class="dot activate" data-index="0"></i>
+                    
+                        <i class="dot" data-index="1"></i>
+                    
+                        <i class="dot" data-index="2"></i>
+                    
+                        <i class="dot" data-index="3"></i>
+                    
+                        <i class="dot" data-index="4"></i>
+                    
+                <a class="btn-next" href="javascript:void(0)"></a>
+            </div>
+				</div>
+			</div>
+		</div>
+		<div id="gallery-frames">
+			<div class="gallery-hd">
+				<div class="ui-slide-control">
+					<a class="btn-prev" href=""></a>
+					<a class="btn-next" href=""></a>
+				</div>
+				<div class="slide-tip"><span>1</span> / <span>10</span></div>
+				<h2>热门推荐</h2>
+			</div>
+			<div id="hot-gallery"><ul class="ui-slide-content">
+				<li class="ui-slide-item"><div class="gallery-frame">
+					<a href=""><img src="../static/db_img/rec1.jpg"></a>
+					<div class="gallery-detail">
+						<div class="gallery-hd"><a href=""><h3>
+							NEW ERA 青年电影季 · 入围作品
+						</h3></a></div>
+						<div class="gallery-bd">
+							<p> 豆瓣电影PRO x 新片场 —— NEW ERA青年电影季。</p>
+						</div>
+					</div>
+				</div></li>
+			</ul></div>
+		</div>
+		<div id="reviews">
+			<div class="reviews-hd"><h2>最受欢迎的影评
+				<span><a href="javascript:void(0)">更多热门影评»</a></span>
+				<span><a href="javascript:void(0)">新片影评»</a></span>
+			</h2></div>
+			<div class="reviews-bd"><div class="review">
+				<div class="review-hd"><a href="">
+					<img src="../static/db_img/rev1.webp">
+				</a></div>
+				<div class="review-bd"><h3><a href="javascript:void(0)">《死侍2》的加长版与普通版的区别</a></h3>
+				<div class="review-meta"><a href="">混斗</a>评论
+					<a href="">《死侍2》</a><span class="allstar40"></span></div>
+				<div class="review-content"> 
+                1.开头的四段黑帮大战都遭到了删改。加长版中的打斗戏份多了，台词少了。其中“极道大战”的删减最为可惜。“极道大战”必须得看加长版，因为打得很有死侍的风格，其中竟然还有“浴巾搓鸟”的打法。 2.死侍在酒吧...
+                <a href="javascript:void(0)">(全文)</a></div>
+				</div>
+			</div></div>
+		</div>
+   	 </div>
+   	 <div class="aside">
+   	 	<div class="rating_answer"><ul><li>
+   	 	<a href="javascript:void(0)">豆瓣电影评分八问</a>
+   	     </li></ul></div>
+		<div class="hot_link">
+		    <h2> 电影活动 &nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;·&nbsp;· </h2>
+		    <ul>
+		          <li>
+		              <a href="javascript:void(0)">
+		                  今晚我有空丨爱情片那么多，偏被这对虐到了
+		              </a>
+		          </li>
+		          <li>
+		              <a href="javascript:void(0)" target="_blank">
+		                  杜琪峰·李沧东·徐峥谈创作者的必经之路
+		              </a>
+		          </li>
+		    </ul>
+  		</div>
+  		<div id="billboard">
+  			<div><h2>一周口碑榜<span>
+  			<a href="javascript:void(0)">更多榜单</a></span></h2></div>
+  			<div><table><tbody>
+  				<tr><td class="order">1</td><td class="title">
+  					<a href="javascript:void(0)">网络密宗</a>
+  				</td></tr>
+  				<tr><td class="order">2</td><td class="title">
+  					<a href="javascript:void(0)">沉默的教室</a>
+  				</td></tr>
+  				<tr><td class="order">3</td><td class="title">
+  					<a href="javascript:void(0)">人言可畏</a>
+  				</td></tr>
+  			</tbody></table></div>
+   		</div>
+   		<div id="contact-and-cooperation"><div><h2>合作联系</h2></div>
+  			<div><ul><li>电影合作邮箱：<img src="../static/db_img/coop_movie.png"></li>
+  			<li>电视剧合作邮箱：<img src="../static/db_img/coop_tv.png"></li></ul></div></div><br>
+  		<div><h2>关注我们</h2><ul class="embassy-list clearfix">
+  			<li><a href="javascript:void(0)" class="icon-weibo"></a>
+  			  <a href="javascript:void(0)" class="primary-link">微博</a></li>
+  			<li><a href="javascript:void(0)" class="icon-weixin"></a>
+  			  <a href="javascript:void(0)" class="primary-link">微信</a></li>
+  			<li><a href="javascript:void(0)" class="icon-bz"></a>
+  			  <a href="javascript:void(0)" class="primary-link">瓣嘴</a></li>
+  			<li><a href="javascript:void(0)" class="icon-gy"></a>
+  			  <a href="javascript:void(0)" class="primary-link">观影club</a></li>
+
+  		</ul></div>
+   	 </div>
+   </div>
+</body>
+
+<script type="text/javascript">
+		
+		var app = new Vue({
+			el:'#app',
+			data:{
+				inputValue:'',
+				img_ing1:'img/rating.png',
+				list:[{mtitle:'无双',img:'../static/db_img/p1.webp',s_rating:'allstar40',score:'8.1'},{mtitle:'找到你',img:'../static/db_img/p2.webp',s_rating:'allstar40',score:'7.3'},{mtitle:'李茶的姑妈',img:'../static/db_img/p3.webp',s_rating:'allstar25',score:'5.3'},{mtitle:'影',img:'../static/db_img/p4.webp',s_rating:'allstar40',
+				score:'7.5'},{mtitle:'胖子行动队',img:'../static/db_img/p5.webp',s_rating:'allstar20',
+				score:'3.6'},{mtitle:'阿凡提之奇缘...',img:'../static/db_img/p6.webp',s_rating:'allstar30',
+				score:'5.6'}]
+				
+			},
+			methods:{
+				handleSubmit:function(){
+					//将文本框的内容添加到list中
+					this.list.push( this.inputValue );
+					this.inputValue = '';
+				},
+				deleteItem:function(index){
+					
+					this.list.splice(index,1);
+				}
+			}
+		})
+		var app = new Vue({
+			el:'#vue2',
+			data:{
+				
+				list1:[{mtitle:'一出好戏',score:'7.2',img:'../static/db_img/p1_s1.jpg'},{mtitle:'碟中谍6：全面瓦解',score:'8.2',img:'../static/db_img/p2_s1.jpg'},{mtitle:'憨豆特工3',score:'7.5',img:'../static/db_img/p3_s1.jpg'},{mtitle:'怪兽',score:'6.0',img:'../static/db_img/p4_s1.jpg'},{mtitle:'你的婚礼',score:'7.1',img:'../static/db_img/p5_s1.jpg'},{mtitle:'动物世界',score:'7.3',img:'../static/db_img/p6_s1.jpg'},{mtitle:'风语咒',score:'6.9',img:'../static/db_img/p7_s1.jpg'},{mtitle:'镰仓无语',score:'6.9',img:'../static/db_img/p8_s1.jpg'},{mtitle:'解除好友2：暗网',score:'7.9',img:'../static/db_img/p9_s1.jpg'},{mtitle:'与神同行2：因与缘',score:'7.5',img:'../static/db_img/p10_s1.jpg'}]
+			},
+			methods:{
+			
+			}
+		})
+	</script>
+</html>
